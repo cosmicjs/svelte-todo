@@ -4,7 +4,7 @@
 
 > This repo contains an todo app that is built with [Svelte](https://svelte.dev), and [Cosmic JS](https://www.cosmicjs.com).
 
->[See live demo hosted on Netlify](https://www.cosmicjs.com/apps/svelte-todo-app)
+>[See live demo](https://www.cosmicjs.com/apps/svelte-todo-app)
 
 ## Prerequisites
 
