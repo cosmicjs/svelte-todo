@@ -15,7 +15,7 @@
       .get(
         `https://api.cosmicjs.com/v1/${
           config.bucket.slug
-        }/object-type/todos?sort=created_at`
+        }/object-type/todos?sort=created_at&read_key=${config.bucket.read_key}`
       )
       .then(response => {
         todos = response.data.objects;
@@ -28,6 +28,7 @@
         type_slug: "todos",
         title: todo,
         content: "New Task",
+        write_key: config.bucket.write_key,
         metafields: [
           {
             title: "Is Complete",
@@ -57,7 +58,8 @@
             value: !todo.metadata.is_complete,
             type: "text"
           }
-        ]
+        ],
+        write_key: config.bucket.write_key
       })
       .then(response => {
         if (response.data) {
@@ -69,7 +71,11 @@
   function handleDelete(event) {
     const todo = event.detail.todo;
     axios
-      .delete(`https://api.cosmicjs.com/v1/${config.bucket.slug}/${todo.slug}`)
+      .delete(`https://api.cosmicjs.com/v1/${config.bucket.slug}/${todo.slug}`, {
+        data: {
+          write_key: config.bucket.write_key
+        }
+      })
       .then(response => {
         if (response) {
           getTodos();
